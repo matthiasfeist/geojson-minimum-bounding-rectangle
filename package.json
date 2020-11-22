@@ -1,15 +1,29 @@
 {
   "name": "geojson-minimum-bounding-rectangle",
   "version": "1.0.0",
-  "description": "",
+  "description": "A library to compute the Minimum Bounding Rectangle of a GeoJSON polygon",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "jest",
     "prepublish": "tsc"
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/matthiasfeist/geojson-minimum-bounding-rectangle.git"
+  },
+  "keywords": [
+    "geojson",
+    "minimum area reactangle",
+    "minimum bounding rectangle",
+    "smallest surrounding rectangle",
+    "minimum bounding box"
+  ],
+  "bugs": {
+    "url": "https://github.com/matthiasfeist/geojson-minimum-bounding-rectangle/issues"
+  },
+  "homepage": "https://github.com/matthiasfeist/geojson-minimum-bounding-rectangle",
+  "author": "Matthias Feist <matf.de@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "@turf/area": "^6.0.1",
