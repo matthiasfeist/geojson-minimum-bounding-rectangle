@@ -1,6 +1,6 @@
 {
   "name": "geojson-minimum-bounding-rectangle",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A library to compute the Minimum Bounding Rectangle of a GeoJSON polygon",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
