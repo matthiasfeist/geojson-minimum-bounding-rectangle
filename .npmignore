@@ -1,0 +1,7 @@
+coverage
+docs
+src
+jest.config.js
+.prettierrc
+dist/*test*
+tsconfig*
