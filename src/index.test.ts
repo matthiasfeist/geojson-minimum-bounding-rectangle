@@ -1,21 +1,21 @@
 import {
   smallestSurroundingRectangleByWidth,
   smallestSurroundingRectangleByArea,
-} from "./index";
+} from "./index.js";
 import * as fs from "fs";
 import * as path from "path";
 
 const getFixture = (name: string) => {
-  const fixturePath = path.join(__dirname, "fixtures", name) + ".geojson";
+  const fixturePath = path.join("src/fixtures", name) + ".geojson";
   return JSON.parse(fs.readFileSync(fixturePath, "utf8"));
 };
 
 describe("Fixture tests", () => {
   describe.each([
-    ["Drottningholm castle, Stockholm", "castle"],
-    ["Republic of Ireland", "ireland"],
-    ["Spain", "spain"],
-  ])('Generates the correct hull for "%s"', (nameOfTest, testId) => {
+    { name: "Drottningholm castle, Stockholm", testId: "castle" },
+    { name: "Republic of Ireland", testId: "ireland" },
+    { name: "Spain", testId: "spain" },
+  ])('Generates the correct hull for "$name"', ({ testId }) => {
     test("smallest Surrounding Rectangle By Width is correct", () => {
       const input = getFixture(testId + "-input");
       const expectedOutput = getFixture(testId + "-output-width");
@@ -45,7 +45,7 @@ describe("Failiure scenarios", () => {
     }).toThrow("Unknown Geometry Type");
   });
 
-  test("Returns Null for only one point as input", () => {
+  test("Throws an Error when a point as input", () => {
     const point = {
       type: "Feature",
       geometry: {
@@ -53,12 +53,16 @@ describe("Failiure scenarios", () => {
         coordinates: [10, 10],
       },
     };
-    expect(smallestSurroundingRectangleByArea(point as any)).toBeNull();
-    expect(smallestSurroundingRectangleByWidth(point as any)).toBeNull();
+    expect(() => {
+      smallestSurroundingRectangleByArea(point);
+    }).toThrow();
+    expect(() => {
+      smallestSurroundingRectangleByArea(point);
+    }).toThrow();
   });
 
   test("Returns Null for only one straight line as input", () => {
-    const point = {
+    const line = {
       type: "Feature",
       geometry: {
         type: "LineString",
@@ -68,14 +72,18 @@ describe("Failiure scenarios", () => {
         ],
       },
     };
-    expect(smallestSurroundingRectangleByArea(point as any)).toBeNull();
-    expect(smallestSurroundingRectangleByWidth(point as any)).toBeNull();
+    expect(() => {
+      smallestSurroundingRectangleByArea(line);
+    }).toThrow();
+    expect(() => {
+      smallestSurroundingRectangleByArea(line);
+    }).toThrow();
   });
 });
 
 describe("Edge cases", () => {
   test("Returns correct output for a line with 3 points", () => {
-    const point = {
+    const line = {
       type: "Feature",
       geometry: {
         type: "LineString",
@@ -86,74 +94,84 @@ describe("Edge cases", () => {
         ],
       },
     };
-    expect(smallestSurroundingRectangleByArea(point as any))
-      .toMatchInlineSnapshot(`
-      Object {
-        "geometry": Object {
-          "coordinates": Array [
-            Array [
-              Array [
-                -74.018712,
-                40.71707899999999,
-              ],
-              Array [
-                -74.02337817348734,
-                40.71188958338605,
-              ],
-              Array [
-                -74.01569595440463,
-                40.707921005302076,
-              ],
-              Array [
-                -74.01102986753443,
-                40.71311014730891,
-              ],
-              Array [
-                -74.018712,
-                40.71707899999999,
-              ],
-            ],
-          ],
-          "type": "Polygon",
-        },
-        "properties": Object {},
-        "type": "Feature",
-      }
-    `);
+    expect(smallestSurroundingRectangleByArea(line)).toMatchInlineSnapshot(`
+{
+  "bbox": [
+    -74.01951378255762,
+    40.71030829997086,
+    -74.01122864008278,
+    40.71735512295224,
+  ],
+  "geometry": {
+    "coordinates": [
+      [
+        [
+          -74.018712,
+          40.71707899999999,
+        ],
+        [
+          -74.02337820209618,
+          40.71188961769072,
+        ],
+        [
+          -74.01569601516172,
+          40.707921003841015,
+        ],
+        [
+          -74.0110298997015,
+          40.71311011153629,
+        ],
+        [
+          -74.018712,
+          40.71707899999999,
+        ],
+      ],
+    ],
+    "type": "Polygon",
+  },
+  "properties": {},
+  "type": "Feature",
+}
+`);
 
-    expect(smallestSurroundingRectangleByWidth(point as any))
-      .toMatchInlineSnapshot(`
-      Object {
-        "geometry": Object {
-          "coordinates": Array [
-            Array [
-              Array [
-                -74.01102975566067,
-                40.71310950676928,
-              ],
-              Array [
-                -74.01370268047083,
-                40.71850493018273,
-              ],
-              Array [
-                -74.02318710074746,
-                40.71580511227448,
-              ],
-              Array [
-                -74.02051399999999,
-                40.71041,
-              ],
-              Array [
-                -74.01102975566067,
-                40.71310950676928,
-              ],
-            ],
-          ],
-          "type": "Polygon",
-        },
-        "properties": Object {},
-        "type": "Feature",
-      }
-    `);
+    expect(smallestSurroundingRectangleByWidth(line)).toMatchInlineSnapshot(`
+{
+  "bbox": [
+    -74.01928668086231,
+    40.70962137264384,
+    -74.01168336823133,
+    40.717300458053025,
+  ],
+  "geometry": {
+    "coordinates": [
+      [
+        [
+          -74.01102973830928,
+          40.713109471732466,
+        ],
+        [
+          -74.01370262236526,
+          40.71850492560466,
+        ],
+        [
+          -74.02318706000682,
+          40.71580514273933,
+        ],
+        [
+          -74.02051399999999,
+          40.71041,
+        ],
+        [
+          -74.01102973830928,
+          40.713109471732466,
+        ],
+      ],
+    ],
+    "type": "Polygon",
+  },
+  "properties": {},
+  "type": "Feature",
+}
+`);
   });
 });

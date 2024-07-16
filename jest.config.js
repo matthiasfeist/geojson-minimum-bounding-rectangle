@@ -1,18 +1,17 @@
-// For a detailed explanation regarding each configuration property, visit:
-// https://jestjs.io/docs/en/configuration.html
-
-module.exports = {
-  collectCoverage: true,
-  globals: {
-    "ts-jest": {
-      tsconfig: "tsconfig.json",
-    },
+/** @type {import('ts-jest').JestConfigWithTsJest} **/
+export default {
+  extensionsToTreatAsEsm: [".ts"],
+  moduleNameMapper: {
+    "^(\\.{1,2}/.*)\\.js$": "$1",
   },
-  moduleFileExtensions: ["ts", "tsx", "js"],
-  testEnvironment: "node",
-  testMatch: ["**/*.test.+(ts|tsx|js)"],
-  testPathIgnorePatterns: ["/node_modules/", "/dist/"],
   transform: {
-    "^.+\\.(ts|tsx)$": "ts-jest",
+    // '^.+\\.[tj]sx?$' to process ts,js,tsx,jsx with `ts-jest`
+    // '^.+\\.m?[tj]sx?$' to process ts,js,tsx,jsx,mts,mjs,mtsx,mjsx with `ts-jest`
+    "^.+\\.tsx?$": [
+      "ts-jest",
+      {
+        useESM: true,
+      },
+    ],
   },
 };

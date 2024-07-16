@@ -1,12 +1,12 @@
-import convex from "@turf/convex";
+import { convex } from "@turf/convex";
 import { AllGeoJSON } from "@turf/helpers";
 import { coordAll } from "@turf/meta";
-import centroid from "@turf/centroid";
-import transformRotate from "@turf/transform-rotate";
-import bearing from "@turf/bearing";
-import envelope from "@turf/envelope";
-import area from "@turf/area";
-import distance from "@turf/distance";
+import { centroid } from "@turf/centroid";
+import { transformRotate } from "@turf/transform-rotate";
+import { bearing } from "@turf/bearing";
+import { envelope } from "@turf/envelope";
+import { area } from "@turf/area";
+import { distance } from "@turf/distance";
 
 export function smallestSurroundingRectangleByArea(geoJsonInput: AllGeoJSON) {
   const convexHull = convex(geoJsonInput);
