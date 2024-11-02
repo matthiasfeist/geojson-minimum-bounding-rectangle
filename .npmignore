@@ -5,3 +5,4 @@ jest.config.js
 .prettierrc
 dist/*test*
 tsconfig*
+.github
