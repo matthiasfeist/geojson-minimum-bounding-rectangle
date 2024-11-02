@@ -1,15 +1,20 @@
-import { convex } from "@turf/convex";
-import { AllGeoJSON } from "@turf/helpers";
-import { coordAll } from "@turf/meta";
-import { centroid } from "@turf/centroid";
-import { transformRotate } from "@turf/transform-rotate";
-import { bearing } from "@turf/bearing";
-import { envelope } from "@turf/envelope";
-import { area } from "@turf/area";
-import { distance } from "@turf/distance";
+import { convex } from '@turf/convex';
+import type { AllGeoJSON } from '@turf/helpers';
+import { coordAll } from '@turf/meta';
+import { centroid } from '@turf/centroid';
+import { transformRotate } from '@turf/transform-rotate';
+import { bearing } from '@turf/bearing';
+import { envelope } from '@turf/envelope';
+import { area } from '@turf/area';
+import { distance } from '@turf/distance';
 
 export function smallestSurroundingRectangleByArea(geoJsonInput: AllGeoJSON) {
   const convexHull = convex(geoJsonInput);
+  if (!convexHull)
+    throw new Error(
+      "Can't calculate smallestSurroundingRectangleByArea for given geometry",
+    );
+
   const centroidCoords = centroid(convexHull);
   const allHullCoords = coordAll(convexHull);
 
@@ -38,6 +43,11 @@ export function smallestSurroundingRectangleByArea(geoJsonInput: AllGeoJSON) {
 
 export function smallestSurroundingRectangleByWidth(geoJsonInput: AllGeoJSON) {
   const convexHull = convex(geoJsonInput);
+  if (!convexHull)
+    throw new Error(
+      "Can't calculate smallestSurroundingRectangleByArea for given geometry",
+    );
+
   const centroidCoords = centroid(convexHull);
   const allHullCoords = coordAll(convexHull);
 
