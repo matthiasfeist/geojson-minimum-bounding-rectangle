@@ -35,7 +35,7 @@ npm install geojson-minimum-bounding-rectangle
 import {
   smallestSurroundingRectangleByWidth,
   smallestSurroundingRectangleByArea,
-} from "geojson-minimum-bounding-rectangle";
+} from 'geojson-minimum-bounding-rectangle';
 
 const boundingRect = smallestSurroundingRectangleByWidth(myGeoJsonInput);
 ```
