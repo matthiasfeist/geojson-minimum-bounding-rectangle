@@ -1,4 +1,6 @@
-[![npm version](https://badge.fury.io/js/geojson-minimum-bounding-rectangle.svg)](https://badge.fury.io/js/geojson-minimum-bounding-rectangle)
+![npm version](https://badgen.net/npm/v/geojson-minimum-bounding-rectangle)
+![npm version](https://badgen.net/npm/types/geojson-minimum-bounding-rectangle)
+![npm version](https://badgen.net/npm/dw/geojson-minimum-bounding-rectangle)
 
 # Minimum Bounding Rectangle for GeoJSON
 
@@ -25,9 +27,10 @@ In case you need CommonJS or compatability with older version of TurfJS, use ver
 
 ### Installation
 
-```sh
+```bash
 npm install geojson-minimum-bounding-rectangle
 ```
+![npm version](https://badgen.net/bundlephobia/minzip/geojson-minimum-bounding-rectangle)
 
 ### Usage
 
