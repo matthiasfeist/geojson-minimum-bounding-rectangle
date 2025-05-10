@@ -30,6 +30,7 @@ In case you need CommonJS or compatability with older version of TurfJS, use ver
 ```bash
 npm install geojson-minimum-bounding-rectangle
 ```
+
 ![npm version](https://badgen.net/bundlephobia/minzip/geojson-minimum-bounding-rectangle)
 
 ### Usage
